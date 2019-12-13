@@ -1,0 +1,38 @@
+@media (max-width: 992px) {
+
+    /* display table rows top down */
+    #t2 thead {
+        display: none; /* hide table head */
+    }
+
+    #t2 td:nth-of-type(1), #t2 td:nth-of-type(2) {
+        font-weight: bold; /* mark heading items of each cyclist */
+    }
+
+    /* add content of th to each row individually */
+    #t2 td:nth-of-type(3)::before {
+        content: "Team: ";
+    }
+
+    #t2 td:nth-of-type(4)::before {
+        content: "Punten: ";
+    }
+
+    #t2 td:nth-of-type(5)::before {
+        content: "Nationaliteit: ";
+    }
+
+    #t2 tr {
+        display: grid;
+        grid-template-columns: 1.5em 1fr;
+    }
+
+    #t2 td:first-child {
+        grid-column: 1/2;
+    }
+
+    #t2 td {
+        grid-column: 2/-1;
+    }
+
+}
