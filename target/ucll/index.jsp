@@ -20,13 +20,6 @@
             <li><a href="bootstrapTables.html">Demo page</a></li>
         </ul>
 
-        <h2>Upload Image</h2>
-        <p>Spike 3</p>
-        <form action="Controller?action=Upload" method="post" enctype="multipart/form-data">
-            <p><input type="file" name="file" /> </p>
-            <p> <input type="submit" id="Submit" name="Submit" value="Verzend" /> </p>
-        </form>
-
         <h2>Generating files</h2>
         <p>Spike 4</p>
         <ul>
