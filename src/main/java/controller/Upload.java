@@ -11,16 +11,19 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class Upload extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("test");
-        Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+
+        Part filePart = request.getPart("file");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = filePart.getInputStream();
 
-        File uploads = new File("/webapp/img/" + fileName);
+        File uploads = new File("C:\\Users\\arneb\\Desktop\\projectweek\\" + fileName);
 
         FileOutputStream outputStream = new FileOutputStream(uploads);
 
@@ -31,10 +34,29 @@ public class Upload extends RequestHandler {
             outputStream.write(bytes, 0, read);
         }
 
-
-
-        System.out.println(fileName);
-        System.out.println("test");
+        uploadToDatabase(uploads.getAbsolutePath());
         return "index.jsp";
+    }
+
+    private void uploadToDatabase(String absolutePath) {
+        if (absolutePath == null || absolutePath.isEmpty()){
+            throw new IllegalArgumentException("geef path");
+        }
+        String sql = "insert into projektweek.image(path, id) values (?,?)";
+       try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection( "jdbc:postgresql://localhost:5432/postgres", "postgres", "pass");
+           System.out.println("Connected to the PostgreSQL server successfully.");
+            PreparedStatement statement = connection.prepareStatement(sql);
+            System.out.println(statement);
+            statement.setString(1, absolutePath);
+            statement.setInt(2,5);
+            statement.execute();
+        } catch (Exception e) {
+           System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e);
+        }
+
+
     }
 }

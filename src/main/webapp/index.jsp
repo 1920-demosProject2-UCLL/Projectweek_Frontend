@@ -27,6 +27,10 @@
             <li><a href="Controller?action=GenerateExcel">Generate Excel.xlsx</a></li>
             <li><a href="Controller?action=GenerateXls">Generate Excel.xls</a></li>
         </ul>
+        <h2>Upload image</h2>
+        <ul>
+            <li><a href="sql.jsp">upload images</a></li>
+        </ul>
     </main>
 
     <footer class="pt-5 pb-3">Demo</footer>
