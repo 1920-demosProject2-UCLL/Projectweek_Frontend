@@ -30,6 +30,7 @@
         <h2>Upload image</h2>
         <ul>
             <li><a href="sql.jsp">upload images</a></li>
+            <li><a href="Controller?action=ViewImgs">view images</a></li>
         </ul>
     </main>
 
